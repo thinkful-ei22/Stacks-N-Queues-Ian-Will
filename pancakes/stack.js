@@ -6,7 +6,7 @@ class _Node {
   }
 }
 
-class Stack {
+export class Stack {
   constructor() {
     this.top = null;
   }
@@ -60,7 +60,7 @@ function main() {
 // compare original string to new string, if === return true
 
 
-function is_palindrome(str) {
+export function is_palindrome(str) {
   str = str.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
   let charStack = new Stack();
   let reverseStr = '';
@@ -92,7 +92,7 @@ function is_palindrome(str) {
 
 //   ( ( ( ) )          ) ) ( ( (
 
-function findMissingParens(expression) {
+export function findMissingParens(expression) {
   let parenStack = new Stack();
   //let closingParenStack = new Stack();
   for (let i = 0; i < expression.length; i++) {
@@ -120,7 +120,7 @@ findMissingParens(expression);
 
 //sorting stack------------------------
 
-function sortStack(stack) {
+export function sortStack(stack) {
   let sortedStack = new Stack();
   sortedStack.push(stack.pop());
   while (stack.top !== null) {
