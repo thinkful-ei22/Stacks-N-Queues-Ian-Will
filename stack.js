@@ -27,13 +27,13 @@ class Stack {
   }
 }
 function peek(stack){
-    console.log(stack.top.data);
+  console.log(stack.top.data);
 }
 
 function display(stack) {
   let curNode = stack.top;
   while (curNode !== null) {
-    console.log(curNode.data)
+    console.log(curNode.data);
     curNode = curNode.next;
   }
 }
@@ -61,11 +61,11 @@ function main(){
 
 
 function is_palindrome(str) {
-  str = str.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  str = str.toLowerCase().replace(/[^a-zA-Z0-9]/g, '');
   let charStack = new Stack();
   let reverseStr = '';
   for (let i = 0; i < str.length; i++) {
-     charStack.push(str[i])
+    charStack.push(str[i]);
   }
   while (charStack.top !== null) {
     reverseStr += charStack.pop();
@@ -78,10 +78,10 @@ function is_palindrome(str) {
 }
 
 // true, true, true
-console.log(is_palindrome("racecar"));
-console.log(is_palindrome("A man, a plan, a canal: Panama"));
-console.log(is_palindrome("1001"));
-console.log(is_palindrome("Tauhida"));
+console.log(is_palindrome('racecar'));
+console.log(is_palindrome('A man, a plan, a canal: Panama'));
+console.log(is_palindrome('1001'));
+console.log(is_palindrome('Tauhida'));
 
 //Matching parentheses in an expression-----------------------
 //input: string - a math expression
@@ -91,3 +91,19 @@ console.log(is_palindrome("Tauhida"));
 //
 
 //   ( ( ( ) )          ) ) ( ( (
+
+function findMissingParens(expression){
+  let ticker = -1;
+  let parenStack = new Stack();
+  for(let i =0; i < expression.length; i++){
+    ticker++;
+    if(expression[i] === '('){
+      parenStack.push(i);
+    }
+    if(expression[i] === ')'){
+      parenStack.pop();
+    }
+  }
+  if(parenStack.top !== null)
+    
+}
