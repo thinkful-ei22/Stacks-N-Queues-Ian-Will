@@ -78,10 +78,10 @@ function is_palindrome(str) {
 }
 
 // true, true, true
-console.log(is_palindrome('racecar'));
-console.log(is_palindrome('A man, a plan, a canal: Panama'));
-console.log(is_palindrome('1001'));
-console.log(is_palindrome('Tauhida'));
+// console.log(is_palindrome('racecar'));
+// console.log(is_palindrome('A man, a plan, a canal: Panama'));
+// console.log(is_palindrome('1001'));
+// console.log(is_palindrome('Tauhida'));
 
 //Matching parentheses in an expression-----------------------
 //input: string - a math expression
@@ -93,17 +93,27 @@ console.log(is_palindrome('Tauhida'));
 //   ( ( ( ) )          ) ) ( ( (
 
 function findMissingParens(expression){
-  let ticker = -1;
   let parenStack = new Stack();
+  //let closingParenStack = new Stack();
   for(let i =0; i < expression.length; i++){
-    ticker++;
+
+
     if(expression[i] === '('){
       parenStack.push(i);
     }
-    if(expression[i] === ')'){
+    if(expression[i] === ')' && parenStack.top !== null){
       parenStack.pop();
+    }else if(expression[i] === ')' ){
+      parenStack.push(i);
     }
-  }
-  if(parenStack.top !== null)
     
+
+  }
+  if(parenStack.top !== null){
+    return display(parenStack);
+  }
+  else console.log('All parens correct');
 }
+
+const expression = '8 + (17 + 92 - 4+6)))))';
+findMissingParens(expression);
