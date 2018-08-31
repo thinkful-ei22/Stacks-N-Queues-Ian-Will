@@ -30,6 +30,13 @@ function peek(stack){
     console.log(stack.top.data);
 }
 
+function display(stack) {
+  let curNode = stack.top;
+  while (curNode !== null) {
+    console.log(curNode.data)
+    curNode = curNode.next;
+  }
+}
 
 function main(){
   let shortStack = new Stack();
@@ -38,6 +45,49 @@ function main(){
   shortStack.push('McCoy');
   shortStack.push('Scotty');
   //return shortStack;
-  return peek(shortStack);
+  // return peek(shortStack);
+  display(shortStack);
 }
-main();
+// main();
+
+//PALINDROME-------------------
+//input: a string
+//output: true/false true = is palindrome
+
+//take out punctuation, spaces, and convert to all lowercase
+// loop through string, and push characters into stack,
+// pop each char off and concat to new string, 
+// compare original string to new string, if === return true
+
+
+function is_palindrome(str) {
+  str = str.toLowerCase().replace(/[^a-zA-Z0-9]/g, "");
+  let charStack = new Stack();
+  let reverseStr = '';
+  for (let i = 0; i < str.length; i++) {
+     charStack.push(str[i])
+  }
+  while (charStack.top !== null) {
+    reverseStr += charStack.pop();
+  }
+  if (reverseStr === str){
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// true, true, true
+console.log(is_palindrome("racecar"));
+console.log(is_palindrome("A man, a plan, a canal: Panama"));
+console.log(is_palindrome("1001"));
+console.log(is_palindrome("Tauhida"));
+
+//Matching parentheses in an expression-----------------------
+//input: string - a math expression
+//output: an index where there is a missing parans
+
+//loop through the string, push each char into stack
+//
+
+//   ( ( ( ) )          ) ) ( ( (
