@@ -1,4 +1,5 @@
-//import {  } from './stack';
+// import { Stack } from './stack';
+// import { _Node } from './stack';
 'use strict';
 
 class _Node {
@@ -66,4 +67,66 @@ function main(){
   console.log('divide>>>>>>>>>>>');
   display(dairyQueen);
 }
-main();
+// main();
+
+class StackQueue {
+  constructor() {
+    this.top = null;
+  }
+
+  enqueue(item) {
+    const newNode = new _Node(item);
+    let tempStack = new Stack();
+    if(this.top === null) {
+      this.push(newNode);
+    }
+    while(this.top !== null){
+      tempStack.push(this.pop())
+    }
+    this.push(newNode)
+    while(tempStack !== null){
+      this.push(tempStack.pop())
+    }
+    return this.top;
+  }
+
+  dequeue() {
+    return this.pop();
+  }
+}
+
+function squareDance(danceLine) {
+  let onDeck = danceLine.dequeue();
+  // let inTheHole = danceLine.dequeue();
+  let secondaryLine = new Queue();
+  secondaryLine.enqueue(danceLine.dequeue());
+  while (danceLine.first !== null) {
+    if (onDeck[0] !== secondaryLine.first.value[0]){
+      console.log(`${onDeck} and ${secondaryLine.first.value}`)
+      secondaryLine.dequeue();
+      onDeck = danceLine.dequeue();
+      secondaryLine.enqueue(danceLine.dequeue());
+    } else {
+      secondaryLine.enqueue(onDeck);
+      onDeck = danceLine.dequeue();
+      // while (secondaryLine !== null) {
+      //   if(onDeck[0] !== secondaryLine.dequeue()[0]){
+      //     console.log(secondaryLine.dequeue())
+      //   }
+      // }
+    }
+    return danceLine;
+  }
+}
+
+function testDance() {
+  let line = new Queue();
+  line.enqueue('F Jane');
+  line.enqueue('M frank');
+  line.enqueue('M john');
+  line.enqueue('M sherlock');
+  line.enqueue('F madonna');
+  line.enqueue('M dave');
+  squareDance(line);
+}
+testDance();
