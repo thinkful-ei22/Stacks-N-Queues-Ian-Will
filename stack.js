@@ -1,6 +1,6 @@
 'use strict';
 class _Node {
-  constructor(data, next){
+  constructor(data, next) {
     this.data = data;
     this.next = next;
   }
@@ -11,8 +11,8 @@ class Stack {
     this.top = null;
   }
   //methods
-  push(data){
-    if(this.top === null){
+  push(data) {
+    if (this.top === null) {
       this.top = new _Node(data, null);
       return this.top;
     }
@@ -20,14 +20,14 @@ class Stack {
     this.top = node;
   }
 
-  pop(){
+  pop() {
     const node = this.top;
     this.top = node.next;
     return node.data;
   }
 }
-function peek(stack){
-  console.log(stack.top.data);
+function peek(stack) {
+  return stack.top.data;
 }
 
 function display(stack) {
@@ -38,7 +38,7 @@ function display(stack) {
   }
 }
 
-function main(){
+function main() {
   let shortStack = new Stack();
   shortStack.push('Kirk');
   shortStack.push('Spock');
@@ -70,7 +70,7 @@ function is_palindrome(str) {
   while (charStack.top !== null) {
     reverseStr += charStack.pop();
   }
-  if (reverseStr === str){
+  if (reverseStr === str) {
     return true;
   } else {
     return false;
@@ -92,24 +92,24 @@ function is_palindrome(str) {
 
 //   ( ( ( ) )          ) ) ( ( (
 
-function findMissingParens(expression){
+function findMissingParens(expression) {
   let parenStack = new Stack();
   //let closingParenStack = new Stack();
-  for(let i =0; i < expression.length; i++){
+  for (let i = 0; i < expression.length; i++) {
 
 
-    if(expression[i] === '('){
+    if (expression[i] === '(') {
       parenStack.push(i);
     }
-    if(expression[i] === ')' && parenStack.top !== null){
+    if (expression[i] === ')' && parenStack.top !== null) {
       parenStack.pop();
-    }else if(expression[i] === ')' ){
+    } else if (expression[i] === ')') {
       parenStack.push(i);
     }
-    
+
 
   }
-  if(parenStack.top !== null){
+  if (parenStack.top !== null) {
     return display(parenStack);
   }
   else console.log('All parens correct');
@@ -117,3 +117,39 @@ function findMissingParens(expression){
 
 const expression = '8 + (17 + 92 - 4+6)))))';
 findMissingParens(expression);
+
+//sorting stack------------------------
+
+function sortStack(stack) {
+  let sortedStack = new Stack();
+  sortedStack.push(stack.pop());
+  while (stack.top !== null) {
+    let tempItem = stack.pop();
+    if(peek(sortedStack) > tempItem) {
+      sortedStack.push(tempItem);
+    } else {
+      let popped = sortedStack.pop();
+      stack.push(popped);
+      while(sortedStack.top !== null && tempItem > peek(sortedStack)){
+        stack.push(sortedStack.pop())
+      }
+      sortedStack.push(tempItem);
+    }
+  }
+  return sortedStack;
+}
+
+function main2(){
+  let newStack = new Stack();
+  newStack.push(1);
+  newStack.push(8);
+  newStack.push(5);
+  newStack.push(4);
+  newStack.push(7);
+  display(newStack);
+  console.log('divider');
+  let newerStack = sortStack(newStack);
+  display(newerStack);
+}
+
+main2();
