@@ -81,11 +81,11 @@ class StackQueue {
       this.push(newNode);
     }
     while(this.top !== null){
-      tempStack.push(this.pop())
+      tempStack.push(this.pop());
     }
-    this.push(newNode)
+    this.push(newNode);
     while(tempStack !== null){
-      this.push(tempStack.pop())
+      this.push(tempStack.pop());
     }
     return this.top;
   }
@@ -102,7 +102,7 @@ function squareDance(danceLine) {
   secondaryLine.enqueue(danceLine.dequeue());
   while (danceLine.first !== null) {
     if (onDeck[0] !== secondaryLine.first.value[0]){
-      console.log(`${onDeck} and ${secondaryLine.first.value}`)
+      console.log(`${onDeck} and ${secondaryLine.first.value}`);
       secondaryLine.dequeue();
       onDeck = danceLine.dequeue();
       secondaryLine.enqueue(danceLine.dequeue());
@@ -119,6 +119,43 @@ function squareDance(danceLine) {
   }
 }
 
+function rodeoClowns(mixedLine){
+  let guys = new Queue();
+  let gals = new Queue();
+  while( mixedLine.first !== null){
+   
+    if(mixedLine.first.value[0] === 'M'){
+      guys.enqueue(mixedLine.dequeue());
+
+    } else {
+      gals.enqueue(mixedLine.dequeue());
+    }
+  }
+  while(gals.first !== null && guys.first !== null){
+    console.log(`Guy is ${guys.first.value} with gal ${gals.first.value}`);
+    gals.dequeue();
+    guys.dequeue();
+  }
+  let counter = 0;
+
+  if( gals.first !== null ){
+    while(gals.first !== null){
+      counter++;
+      gals.dequeue();
+    }
+    console.log(`There are ${counter} girls left`);
+  }
+
+  if( guys.first !== null ){
+    while(guys.first !== null){
+      counter++;
+      guys.dequeue();
+    }
+    console.log(`There are ${counter} guys left`);
+  }
+
+}
+
 function testDance() {
   let line = new Queue();
   line.enqueue('F Jane');
@@ -127,6 +164,32 @@ function testDance() {
   line.enqueue('M sherlock');
   line.enqueue('F madonna');
   line.enqueue('M dave');
-  squareDance(line);
+  rodeoClowns(line);
 }
 testDance();
+
+
+// function DMV(line, peopleServed){
+//   let ticker = 0;
+//   while(ticker <= peopleServed){ 
+//     if((Math.random() <= .75 )){
+//       line.dequeue();
+//       ticker++;
+//     } else {
+//       line.enqueue(line.dequeue());
+//       ticker++;
+//     }
+//   }
+//   return line;
+// }
+// const queue = new Queue();
+// queue.enqueue('Harry');
+// queue.enqueue('Harry');
+// queue.enqueue('Harry');
+// queue.enqueue('Harry');
+// queue.enqueue('Harry');
+// queue.enqueue('Harry');
+// queue.enqueue('Harry');
+// queue.enqueue('Harry');
+// queue.enqueue('Harry');
+// display((DMV(queue, 9)));
